@@ -31,3 +31,20 @@
     transform: rotate(360deg);
   }
 }
+
+.cart-items {
+  padding-top: 10px;
+}
+
+.cart-items ul {
+  padding-left: 0;
+}
+
+.cart-items li {
+  list-style: none;
+  padding-bottom: 10px;
+}
+
+.btn.remove-btn {
+  margin-left: 10px;
+}

@@ -2,51 +2,41 @@
   "products": [
     {
       "id": 1,
-      "sku": 18644119330491310,
-      "title": "Cool Black  T-Shirt",
-      "description": "Clean and elegant black T-Shirt",
+      "title": "Cool Black T-Shirt",
       "availableSizes": [
-        "XL"
+        "M",
+        "XL",
+        "XXL"
       ],
-      "price": 27.9,
-      "isFreeShipping": false
+      "price": 27.9
     },
     {
       "id": 2,
-      "sku": 11854078013954528,
-      "title": "Danger Knife Grey T-Shirt",
-      "description": "Danger Knife Grey",
+      "title": "Soul Fire",
       "availableSizes": [
         "XS",
         "M",
         "L"
       ],
-      "price": 14.9,
-      "isFreeShipping": true
+      "price": 14.9
     },
     {
       "id": 3,
-      "sku": 9197907543445676,
-      "title": "Dark Gray DGK Script Tee",
-      "description": "Cool DGK Script",
+      "title": "Waves time",
       "availableSizes": [
         "XS",
         "M",
         "L"
       ],
-      "price": 14.9,
-      "isFreeShipping": true
+      "price": 14.9
     },
     {
       "id": 4,
-      "sku": 876661122392077,
-      "title": "Born On The Streets  T-Shirt",
-      "description": "Born On The Streets",
+      "title": "Clean and Elegant Black Tee",
       "availableSizes": [
         "XL"
       ],
-      "price": 25.9,
-      "isFreeShipping": false
+      "price": 25.9
     }
   ]
 }

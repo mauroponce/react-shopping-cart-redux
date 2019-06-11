@@ -5,9 +5,6 @@ export default function Filter(props) {
   return (
     <div className="row">
       <div className="col-md-4">
-        {count} products found.
-      </div>
-      <div className="col-md-4">
         <label htmlFor="orderBy">
           Order By Price
           <select className="form-control" id="orderBy" name='sort'
@@ -34,6 +31,9 @@ export default function Filter(props) {
             <option value="XXL">XXL</option>
           </select>
         </label>
+      </div>
+      <div className="col-md-4">
+        <b>{count} products found.</b>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import './App.css';
 import ProductList from './components/ProductList';
 import Filter from './components/Filter';
 import { api } from './utils';
-import Basket from './components/Basket';
+import Cart from './components/Cart';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,24 +12,7 @@ class App extends React.Component {
       products: [],
       size: '',
       sort: '',
-      cartItems: [
-        {
-          "product": {
-            "id": 2,
-            "sku": 11854078013954528,
-            "title": "Danger Knife Grey T-Shirt",
-            "description": "Danger Knife Grey",
-            "availableSizes": [
-              "XS",
-              "M",
-              "L"
-            ],
-            "price": 14.9,
-            "isFreeShipping": true
-          },
-          count: 2
-        }
-      ] // array of { product: {..}, count: number } objects
+      cartItems: JSON.parse(localStorage.getItem("cartItems")) // previous to any render
     };
   }
 
@@ -44,19 +27,6 @@ class App extends React.Component {
     this.setState({ products });
   }
 
-  handleAddToCart = (e, product) => {
-    e.preventDefault();
-    const cartItems = [...this.state.cartItems];
-    const foundItemIndex = cartItems.findIndex(obj => obj.product.id === product.id);
-
-    if (foundItemIndex > -1) { //item found
-      cartItems[foundItemIndex].count++;
-    } else {
-      cartItems.push({ product: product, count: 1 })
-    }
-    this.setState({ cartItems });
-  }
-
   handleFilterChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -65,18 +35,34 @@ class App extends React.Component {
     }, this.searchProducts);
   }
 
+  handleAddToCart = (_e, product) => {
+    const cartItems = [...this.state.cartItems]; // make a copy
+    const foundItemIndex = cartItems.findIndex(obj => obj.product.id === product.id);
 
+    if (foundItemIndex > -1) { //item found
+      cartItems[foundItemIndex].count++;
+    } else {
+      cartItems.push({ product: product, count: 1 })
+    }
+    this.updateCartItems(cartItems);
+  }
 
-  handleRemoveCartItem = (e, product) => {
-    e.preventDefault();
+  handleRemoveFromCart = (_e, product) => {
+    const cartItems = this.state.cartItems.filter(cartItem => cartItem.product.id !== product.id);
+    this.updateCartItems(cartItems);
+  }
 
+  // set state and update in localStorage
+  updateCartItems(cartItems) {
+    this.setState({ cartItems });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }
 
   render() {
     const { size, sort, products, cartItems } = this.state;
     return (
       <div className="container">
-        <h1>Ecommerce Shopping Cart</h1>
+        <h1>React Shopping Cart</h1>
         <hr/>
         <div className="row">
           <div className="col-md-8">
@@ -93,7 +79,7 @@ class App extends React.Component {
             />
           </div>
           <div className="col-md-4">
-            <Basket cartItems={cartItems} handleRemoveCartItem={this.handleRemoveCartItem}/>
+            <Cart cartItems={cartItems} handleRemoveFromCart={this.handleRemoveFromCart}/>
           </div>
         </div>
       </div>
