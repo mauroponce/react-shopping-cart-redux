@@ -2,11 +2,10 @@ import React from 'react';
 import { formatCurrency } from '../utils';
 
 export default function ProductList(props) {
-
   const items = props.products.map(product => (
     <div className='col-md-4' key={product.id}>
       <div className="thumbnail text-center">
-        <img src="products/image.jpg" alt=""/>
+        <img src={`products/${product.sku}.png`} alt=""/>
         <p>{product.title}</p>
         <div>
           <b style={{ paddingRight: '10px' }}>{formatCurrency(product.price)}</b>

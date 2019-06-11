@@ -3,15 +3,16 @@ import './App.css';
 import ProductList from './components/ProductList';
 import Filter from './components/Filter';
 import { api } from './utils';
+import Basket from './components/Basket';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartItems: [],
       products: [],
       size: '',
-      sort: ''
+      sort: '',
+      cartItems: []
     };
   }
 
@@ -19,6 +20,11 @@ class App extends React.Component {
     // no need to declare async in parent function to call async function,
     // if await is not used in parent function.
     this.searchProducts();
+  }
+
+  async searchProducts() {
+    const products = await api.findProducts(this.state.size, this.state.sort);
+    this.setState({ products });
   }
 
   handleAddToCart = (e, product) => {
@@ -35,12 +41,15 @@ class App extends React.Component {
     }, this.searchProducts);
   }
 
-  async searchProducts() {
-    const products = await api.findProducts(this.state.size, this.state.sort);
-    this.setState({ products });
+
+
+  handleRemoveCartItem = (e, product) => {
+    e.preventDefault();
+
   }
 
   render() {
+    const { size, sort, products, cartItems } = this.state;
     return (
       <div className="container">
         <h1>Ecommerce Shopping Cart</h1>
@@ -48,17 +57,20 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-8">
             <Filter
-              size={this.state.size}
-              sort={this.state.sort}
-              count={this.state.products.length}
+              size={size}
+              sort={sort}
+              count={products.length}
               handleFilterChange={this.handleFilterChange}
             />
+            <hr/>
             <ProductList
-              products={this.state.products}
+              products={products}
               handleAddToCart={this.handleAddToCart}
             />
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <Basket cartItems={cartItems} handleRemoveCartItem={this.handleRemoveCartItem}/>
+          </div>
         </div>
       </div>
     );
