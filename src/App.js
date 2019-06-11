@@ -12,7 +12,24 @@ class App extends React.Component {
       products: [],
       size: '',
       sort: '',
-      cartItems: []
+      cartItems: [
+        {
+          "product": {
+            "id": 2,
+            "sku": 11854078013954528,
+            "title": "Danger Knife Grey T-Shirt",
+            "description": "Danger Knife Grey",
+            "availableSizes": [
+              "XS",
+              "M",
+              "L"
+            ],
+            "price": 14.9,
+            "isFreeShipping": true
+          },
+          count: 2
+        }
+      ] // array of { product: {..}, count: number } objects
     };
   }
 
@@ -29,7 +46,14 @@ class App extends React.Component {
 
   handleAddToCart = (e, product) => {
     e.preventDefault();
-    const cartItems = [...this.state.cartItems, product];
+    const cartItems = [...this.state.cartItems];
+    const foundItemIndex = cartItems.findIndex(obj => obj.product.id === product.id);
+
+    if (foundItemIndex > -1) { //item found
+      cartItems[foundItemIndex].count++;
+    } else {
+      cartItems.push({ product: product, count: 1 })
+    }
     this.setState({ cartItems });
   }
 
