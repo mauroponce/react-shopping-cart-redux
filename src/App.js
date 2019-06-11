@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import ProductList from './components/ProductList';
 import Filter from './components/Filter';
+import { api } from './utils';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // no need to declare async in parent function to call async function,
+    // if await is not used in parent function.
     this.searchProducts();
   }
 
@@ -29,30 +32,12 @@ class App extends React.Component {
     const value = e.target.value;
     this.setState({
       [name] : value
-    }, this.searchProducts)
+    }, this.searchProducts);
   }
 
-  searchProducts() {
-    // call api passing sort, size and search in the server.
-    const { sort } = this.state;
-    fetch('http://localhost:4000/products')
-      .then(res => res.json())
-      .then(data => {
-        let products;
-        if (this.state.sort !== '') {
-          products = data.sort((a,b) => {
-            if (sort === 'lowest') {
-              return a.price < b.price ? -1 : 1;
-            } else {
-              return a.price < b.price ? 1 : -1;
-            }
-          });
-        } else {
-          // sort by id
-          products = data.sort((a,b) => a.id < b.id ? -1 : 1);
-        }
-        this.setState({ products })
-      });
+  async searchProducts() {
+    const products = await api.findProducts(this.state.size, this.state.sort);
+    this.setState({ products });
   }
 
   render() {
