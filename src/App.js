@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import ProductList from './components/ProductList';
 import Filter from './components/Filter';
@@ -88,3 +89,13 @@ class App extends React.Component {
 }
 
 export default App;
+function mapStateToProps(state) {
+  return {
+    // Add state here
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null // Add actions here
+)(App);

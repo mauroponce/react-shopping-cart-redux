@@ -1,5 +1,5 @@
 ## Clone the project
-`git clone git@github.com:mauroponce/react-shopping-cart.git`
+`git clone git@github.com:mauroponce/react-shopping-cart-redux.git`
 
 ## install json server
 `npm install -g json-server`
