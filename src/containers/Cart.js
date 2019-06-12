@@ -1,29 +1,33 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { formatCurrency } from '../utils';
+import { removeProductFromCart } from '../actions/cartItems';
 
-export default function Cart(props) {
-  const { cartItems, handleRemoveFromCart } = props;
-  return (
-    <div className="alert alert-info">
-      {
-        cartItems.length === 0 ?
-          "Your cart is empty."
-        :
-          <div>You have {cartItems.length} products in the cart.</div>
-      }
+class Cart extends React.Component {
+  render() {
+    const { cartItems } = this.props;
 
-      {
-        cartItems.length > 0 &&
+    return (
+      <div className="alert alert-info">
+        {
+          cartItems.length === 0 ?
+            "Your cart is empty."
+            :
+            <div>You have {cartItems.length} products in the cart.</div>
+        }
+
+        {
+          cartItems.length > 0 &&
           <div className="cart-items">
             <ul>
               {cartItems.map(item => (
                 <li key={item.product.id} className="row">
-                  <div className="col-md-9" style={{paddingRight: 0}}>
+                  <div className="col-md-9" style={{ paddingRight: 0 }}>
                     <b>{item.product.title}</b> X {item.count}
                   </div>
                   <div className="col-md-3" style={{ paddingLeft: 0 }}>
                     <button className="btn btn-danger btn-sm remove-btn"
-                      onClick={e => handleRemoveFromCart(e, item.product)}
+                      onClick={() => this.props.removeProductFromCart(item.product)}
                     >
                       Remove
                     </button>
@@ -40,7 +44,20 @@ export default function Cart(props) {
               }
             </b>
           </div>
-      }
-    </div>
-  )
+        }
+      </div>
+    )
+  }
+
 }
+
+function mapStateToProps(state) {
+  return {
+    cartItems: state.cartItems
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { removeProductFromCart }
+)(Cart);

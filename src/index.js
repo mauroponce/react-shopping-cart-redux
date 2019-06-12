@@ -4,10 +4,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import throttle from 'lodash/throttle';
 import rootReducer from './reducers/rootReducer';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { saveToLocalStorage } from './utils';
 
 const store = createStore(
   rootReducer,
@@ -15,6 +17,11 @@ const store = createStore(
     applyMiddleware(thunk),
   )
 );
+
+store.subscribe(throttle(() => {
+  saveToLocalStorage("cartItems", store.getState().cartItems)
+}, 1000)); // write to localStorage maximum once per second
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

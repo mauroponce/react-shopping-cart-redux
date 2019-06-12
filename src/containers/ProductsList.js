@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../actions/products';
+import { addProductToCart } from '../actions/cartItems';
 import { formatCurrency } from '../utils';
 
 class ProductList extends React.Component {
   componentDidMount() {
-    this.props.fetchProducts();
+    this.props.fetchProducts(); //default size and sort
   }
 
   render() {
@@ -17,7 +18,7 @@ class ProductList extends React.Component {
           <div>
             <b style={{ paddingRight: '10px' }}>{formatCurrency(product.price)}</b>
             <button className="btn btn-primary"
-              onClick={e => this.props.handleAddToCart(e, product)}>
+              onClick={() => this.props.addProductToCart(product)}>
               Add To Cart
             </button>
           </div>
@@ -38,5 +39,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchProducts }
+  { fetchProducts, addProductToCart }
 )(ProductList);

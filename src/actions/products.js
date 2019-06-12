@@ -1,14 +1,15 @@
 export const PRODUCTS_FETCHED = 'PRODUCTS_FETCHED';
 
 export function fetchProducts(size = '', sort = '') {
+  // filtering and sorting should be implemented in the backend,
+  // and just return products as the payload here.
   return dispatch => {
     fetch('http://localhost:4000/products')
       .then(res => res.json())
       .then(products => {
         let payload;
 
-        // filtering and sorting should be implemented in the backend,
-        // and just return products as the payload here.
+
 
         // filter by size
         if (size !== '') {
