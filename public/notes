@@ -1,1 +1,9 @@
 json-server public/db.json --port 4000
+
+agregarle react router,
+/products que muestre todos los productos, con un boton edit y otro eliminar,
+y que haya un boton para agregar nuevo
+
+tener ProductForm, que se reutilice
+tener validacion de errores
+agregar axios y que postee products
