@@ -38,7 +38,15 @@ export default class ProductForm extends Component {
 
     this.setState({ errors });
 
-    // TODO: complete submit
+    const isValid = Object.keys(errors).length === 0;
+    if (isValid) {
+      const product = {
+        title: this.state.title,
+        price: this.state.price,
+      }
+      // TODO: set loading state
+      this.props.saveProduct(product);
+    }
   }
 
   render() {

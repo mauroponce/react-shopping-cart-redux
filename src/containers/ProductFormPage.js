@@ -10,9 +10,10 @@ class ProductFormPage extends Component {
 
   saveProduct = (product) => {
     if (product.id) {
-      // update
+      // TODO: call updateProduct action
     } else {
-      // create
+      debugger
+      // TODO: call createProduct action
     }
   }
 
@@ -22,7 +23,7 @@ class ProductFormPage extends Component {
         {
           this.state.redirect ?
             <Redirect to='/products' /> :
-            <ProductForm />
+            <ProductForm saveProduct={this.saveProduct}/>
         }
       </div>
     )
