@@ -12,7 +12,7 @@ class ProductsPage extends Component {
     const items = this.props.products.map(product => (
       <div className='col-md-3' key={product.id}>
         <div className="thumbnail text-center">
-          <img src={`/products/${product.id}.png`} alt="" />
+          <img src={product.imageUrl} alt="" />
           <p>{product.title} - <b>{formatCurrency(product.price)}</b></p>
           <div className='row'>
             <button className="btn btn-primary"

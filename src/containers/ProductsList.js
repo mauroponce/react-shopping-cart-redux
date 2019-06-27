@@ -13,7 +13,7 @@ class ProductList extends React.Component {
     const items = this.props.products.map(product => (
       <div className='col-md-4' key={product.id}>
         <div className="thumbnail text-center">
-          <img src={`products/${product.id}.png`} alt="" />
+          <img src={product.imageUrl} alt="" />
           <p>{product.title}</p>
           <div>
             <b style={{ paddingRight: '10px' }}>{formatCurrency(product.price)}</b>

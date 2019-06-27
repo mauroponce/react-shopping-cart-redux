@@ -8,7 +8,8 @@
         "XL",
         "XXL"
       ],
-      "price": 27.9
+      "price": 27.9,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Blue_Tshirt.jpg/220px-Blue_Tshirt.jpg"
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
         "M",
         "L"
       ],
-      "price": 14.9
+      "price": 14.9,
+      "imageUrl": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1550688238-theory-1550688225.jpg"
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
         "M",
         "L"
       ],
-      "price": 14.9
+      "price": 14.9,
+      "imageUrl": "https://rendering.documents.cimpress.io/v1/vp/preview?width=690&height=690&quality=80&scene=https://scene.products.cimpress.io/v1/scenes/39fff789-7ad5-4b08-8faf-753d0c960f48"
     },
     {
       "id": 4,
@@ -36,7 +39,8 @@
       "availableSizes": [
         "XL"
       ],
-      "price": 25.9
+      "price": 25.9,
+      "imageUrl": "https://images.bewakoof.com/original/wink-new-half-sleeve-t-shirt-men-s-printed-t-shirts-197747-1538829534.jpg"
     }
   ]
 }

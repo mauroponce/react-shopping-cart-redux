@@ -5,6 +5,7 @@ export default class ProductForm extends Component {
   state = {
     title: '',
     price: '',
+    imageUrl: '',
     errors: {}
   }
 
@@ -33,7 +34,11 @@ export default class ProductForm extends Component {
     }
 
     if (this.state.price === '') {
-      errors.price = "Title can't be blank";
+      errors.price = "Price can't be blank";
+    }
+
+    if (this.state.imageUrl === '') {
+      errors.imageUrl = "Image URL can't be blank";
     }
 
     this.setState({ errors });
@@ -49,24 +54,26 @@ export default class ProductForm extends Component {
     }
   }
 
+  renderFormGroup = (field, label) => {
+    return (
+      <div className={classnames('form-group', { 'has-error': !!this.state.errors[field] })}>
+        <label htmlFor={field}  className='control-label'>{label}</label>
+        <input type="text" className="form-control"
+          onChange={this.handleChange}
+          name={field} id={field} />
+        <span class="help-block">{this.state.errors[field]}</span>
+      </div>
+    );
+  }
+
   render() {
-    const { errors } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className={classnames('form-group', { 'has-error': !!errors.title })}>
-          <label htmlFor="title" className='control-label'>Title</label>
-          <input type="text" className="form-control"
-            onChange={this.handleChange}
-            id="title" name="title" />
-        </div>
-        <div className={classnames('form-group', { 'has-error': !!errors.price })}>
-          <label htmlFor="price">Price</label>
-          <input type="text" className="form-control"
-            onChange={this.handleChange}
-            id="price" name="price" />
-        </div>
-          <button type="submit"
-            className="btn btn-default">Submit</button>
+        {this.renderFormGroup('title', 'Title')}
+        {this.renderFormGroup('price', 'Price')}
+        {this.renderFormGroup('imageUrl', 'Image URL') }
+        <button type="submit"
+          className="btn btn-default">Submit</button>
       </form>
     )
   }
